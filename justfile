@@ -75,7 +75,7 @@ lint-format:
 [private]
 [group("Linting")]
 lint-ec:
-  ec
+  editorconfig-checker
 
 # Use markdownlint-cli2 to lint Markdown files.
 [private]

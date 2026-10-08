@@ -14,7 +14,7 @@ dependencies from `package.json`.
 | [hk](https://github.com/jdx/hk) | Git hooks manager | `hk.pkl` | mise |
 | [pkl](https://pkl-lang.org) | Config language runtime used by hk | | mise |
 | [committed](https://github.com/crate-ci/committed) | Commit message linter | `config/committed.toml` | mise |
-| [editorconfig-checker](https://editorconfig-checker.github.io) (`ec`) | Checks files against `.editorconfig` | `.editorconfig`, `.editorconfig-checker.json` | mise |
+| [editorconfig-checker](https://editorconfig-checker.github.io) | Checks files against `.editorconfig` | `.editorconfig`, `.editorconfig-checker.json` | mise |
 | [markdownlint-cli2](https://github.com/DavidAnson/markdownlint-cli2) | Markdown linter | `config/.markdownlint-cli2.yaml` | mise |
 
 `tsconfig.json` extends `.claude-plugin/types/tsconfig.json`, which Claude Code writes on
