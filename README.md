@@ -1,0 +1,123 @@
+# Lens
+
+A calmer Claude Code transcript: tool runs fold to one line, errors read in plain words, and
+nothing Claude sees changes.
+
+A long turn in Claude Code is mostly tool calls: every read, command and edit gets its rows, and
+the reply you care about sits between them. Lens redraws the transcript so you can follow what
+Claude did and what it said, and opens the detail only when you click.
+
+## Before and after
+
+The same turn: Claude reads two files and runs the tests, which fail.
+
+**Without Lens** (`/lens raw` shows Claude Code's own drawing):
+
+```text
+> run the tests
+
+● I'll check the config, then run the tests.
+
+● Read(src/config.ts)
+  ⎿  Read 34 lines
+
+● Read(package.json)
+  ⎿  Read 41 lines
+
+● Bash(npm run tset -- --coverage)
+  ⎿  Error: Exit code 1
+     npm ERR! Missing script: "tset"
+     npm ERR! A complete log of this run can be found in:
+     npm ERR!     /Users/you/.npm/_logs/2026-10-08T15_22_04_118Z-debug-0.log
+```
+
+**Normal**, the default: one count line per run, and each step with the one fact that matters.
+
+```text
+> run the tests
+                                                                You · 10:22
+
+I'll check the config, then run the tests.
+                                                           Opus 5.5 · 10:22
+• Read 2 files, ran 1 command (1 failed)
+  ✓ Read config.ts · 34 lines
+  ✓ Read package.json · 41 lines
+  ✗ Run the tests · exit 1
+    The command failed (exit 1). Press Ctrl+O to see its output.
+    npm ERR! Missing script: "tset"
+                                                    Opus 5.5 · 10:22 (gray)
+```
+
+**Clean** (`/lens clean`), the lean option: a step count per run and only what went wrong. Use
+it when you want to read Claude's replies without distractions.
+
+```text
+> run the tests
+                                                                You · 10:22
+
+I'll check the config, then run the tests.
+                                                           Opus 5.5 · 10:22
+▸ 3 steps · 1 failed
+  ✗ The command failed (exit 1). Press Ctrl+O to see its output.
+                                                    Opus 5.5 · 10:22 (gray)
+```
+
+Click a step and it opens in place: the command in a box with its full output under it, or the
+diff of an edit.
+
+## Install
+
+In Claude Code:
+
+```text
+/plugin install lens --marketplace waldoibarra/claude-code-lens
+```
+
+Answer `y` to add the marketplace, then pick a scope. Lens starts in the normal view.
+
+## What you get
+
+- **Three views, one command:** normal by default; `/lens clean` strips the transcript to replies
+  and failures for distraction-free reading; `/lens raw` shows Claude Code's own drawing. Each
+  redraws the whole transcript, earlier turns included.
+- **Folded runs:** each group of back-to-back tool calls becomes one line with counts. Long runs
+  show 5 steps and a `+N more` you can click.
+- **Plain labels:** `Run the tests` and `Edited README.md`, never the raw command, the full path or
+  a tool call ID.
+- **Plain errors:** raw errors become one line that says what happened and what to do, across 15
+  kinds of failure.
+- **Click to open:** commands show what ran and the full output, edits show their diff, and failed
+  steps show the full error.
+- **Message labels:** your prompts and Claude's replies get a right-aligned label with the time and,
+  for replies, the model that wrote them, so a `/model` switch is visible where it happened.
+- **Answered questions:** a question Claude asked folds to one line; click it to see the question
+  and your answer.
+- **A working line:** while a step runs, the spinner names it.
+- **Sub-agents:** a delegated step shows the model the agent ran on.
+
+Read [Views](/docs/views.md) before picking a view; it shows each one and lists every error line.
+
+## Nothing is lost
+
+- Claude reads exactly what it read before. Lens changes the drawing, never the conversation, the
+  transcript file or what is sent to the model.
+- **Ctrl+O** still opens the full transcript, and `/lens raw` turns Lens off for the screen at any
+  time.
+- The plugin makes no model calls and adds nothing to your usage.
+
+## Notes
+
+- Lens is built for the fullscreen interface (`/tui fullscreen`), where clicks work. It uses
+  Claude Code's function-hook plugin API, which is early access; Lens is tested against Claude Code
+  2.1.293.
+- Turns from before Lens loaded show one plain line per step, without folds or timestamps.
+- Clicking outside Lens's lines selects the row with a gray highlight. That is Claude Code's own
+  behavior and a plugin cannot turn it off.
+
+Read [How it works](/docs/how-it-works.md) before relying on Lens in an unusual setup; it covers
+what Lens records and every known limit. Read [Development](/docs/development.md) before changing
+the plugin.
+
+## License
+
+MIT
