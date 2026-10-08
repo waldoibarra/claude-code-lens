@@ -1,0 +1,14 @@
+{
+  "name": "claude-code-lens",
+  "description": "Lens, a Claude Code plugin for a calmer transcript.",
+  "owner": {
+    "name": "Waldo Ibarra"
+  },
+  "plugins": [
+    {
+      "name": "lens",
+      "source": "./",
+      "description": "A calmer Claude Code transcript: fold tool runs, read plain errors, switch views with /lens."
+    }
+  ]
+}
