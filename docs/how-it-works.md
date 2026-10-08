@@ -47,7 +47,9 @@ session. Tool calls made inside a sub-agent are not recorded as steps; the deleg
 - **Facts:** a background sub-agent shows no duration, because its result returns before it
   finishes. Builds without separate search tools show searches as commands, with an exit code
   instead of a match count.
-- **API:** the function-hook plugin API is early access and may change between Claude Code
-  releases. Lens is built and tested against Claude Code 2.1.293.
+- **API:** Lens is built on Claude Mods, the function-hook plugin API that Claude Code 2.1.287
+  added. The API is early access and may change between releases. Lens is tested on Claude Code
+  2.1.293; 2.1.289 fixed installed mods not loading in the first session after an upgrade, and a
+  `ui.render` failure that could end a session, so older builds may misbehave.
 
 Read [Development](/docs/development.md) before changing the hooks module.

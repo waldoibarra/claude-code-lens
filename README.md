@@ -75,7 +75,7 @@ claude plugin install lens@claude-code-lens
 Start a new Claude Code session, or run `/reload-plugins` in an open one. Lens starts in the normal
 view; type `/lens` to check it loaded.
 
-Lens needs Claude Code's function-hook plugin API, which is early access and tested on Claude Code
+Lens needs Claude Code 2.1.287 or later, the release that added Claude Mods; it is tested on
 2.1.293. If `/lens` is not a known command after installing, update Claude Code with
 `claude update` and try again.
 
