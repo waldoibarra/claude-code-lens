@@ -67,13 +67,17 @@ diff of an edit.
 
 ## Install
 
-In Claude Code:
-
-```text
-/plugin install lens --marketplace waldoibarra/claude-code-lens
+```sh
+claude plugin marketplace add waldoibarra/claude-code-lens
+claude plugin install lens@claude-code-lens
 ```
 
-Answer `y` to add the marketplace, then pick a scope. Lens starts in the normal view.
+Start a new Claude Code session, or run `/reload-plugins` in an open one. Lens starts in the normal
+view; type `/lens` to check it loaded.
+
+Lens needs Claude Code's function-hook plugin API, which is early access and tested on Claude Code
+2.1.293. If `/lens` is not a known command after installing, update Claude Code with
+`claude update` and try again.
 
 ## What you get
 
@@ -107,9 +111,7 @@ Read [Views](/docs/views.md) before picking a view; it shows each one and lists 
 
 ## Notes
 
-- Lens is built for the fullscreen interface (`/tui fullscreen`), where clicks work. It uses
-  Claude Code's function-hook plugin API, which is early access; Lens is tested against Claude Code
-  2.1.293.
+- Lens is built for the fullscreen interface (`/tui fullscreen`), where clicks work.
 - Turns from before Lens loaded show one plain line per step, without folds or timestamps.
 - Clicking outside Lens's lines selects the row with a gray highlight. That is Claude Code's own
   behavior and a plugin cannot turn it off.
