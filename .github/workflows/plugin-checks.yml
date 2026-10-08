@@ -1,0 +1,36 @@
+name: Plugin checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.claude-plugin/**'
+      - 'hooks/**'
+      - 'types/**'
+      - 'tests/**'
+      - 'justfile'
+      - '.github/workflows/plugin-checks.yml'
+  pull_request:
+    paths:
+      - '.claude-plugin/**'
+      - 'hooks/**'
+      - 'types/**'
+      - 'tests/**'
+      - 'justfile'
+      - '.github/workflows/plugin-checks.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jdx/mise-action@v2
+      - name: Install Claude Code
+        run: npm install --global @anthropic-ai/claude-code
+      - name: Validate
+        run: just validate
+      - name: Test
+        run: just test
