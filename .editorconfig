@@ -1,0 +1,23 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+max_line_length = 100
+
+# Markdown uses three-space list continuations and aligned text in examples.
+[*.md]
+max_line_length = off
+indent_size = unset
+
+# Machine-generated lockfile.
+[bun.lock]
+max_line_length = off
+
+# Manifest descriptions are single JSON strings and cannot be wrapped.
+[.claude-plugin/*.json]
+max_line_length = off

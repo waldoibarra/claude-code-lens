@@ -1,0 +1,8 @@
+[tools]
+bun = "latest"
+just = "latest"
+editorconfig-checker = "latest"
+committed = "latest"
+hk = "latest"
+pkl = "latest"
+markdownlint-cli2 = "latest"

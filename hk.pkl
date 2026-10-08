@@ -1,0 +1,38 @@
+amends "package://github.com/jdx/hk/releases/download/v1.45.0/hk@1.45.0#/Config.pkl"
+
+hooks {
+  ["pre-commit"] {
+    steps {
+      ["editorconfig-checker"] {
+        check = "just lint-ec"
+      }
+      ["markdownlint-cli2"] {
+        glob = List("**/*.md", "config/.markdownlint-cli2.yaml")
+        check = "just lint-md"
+      }
+      ["prettier"] {
+        glob = List("**/*.ts", "**/*.tsx", "**/*.json", ".prettierrc.json")
+        check = "just lint-format"
+      }
+      ["validate"] {
+        glob = List(".claude-plugin/*.json", "hooks/**", "types/**")
+        check = "just validate"
+      }
+      ["typecheck"] {
+        glob = List("hooks/**", "types/**", "tests/**", "tsconfig.json", "package.json", "bun.lock")
+        check = "just typecheck"
+      }
+      ["test"] {
+        glob = List("hooks/**", "types/**", "tests/**")
+        check = "just test"
+      }
+    }
+  }
+  ["commit-msg"] {
+    steps {
+      ["committed"] {
+        check = "just lint-commit {{commit_msg_file}}"
+      }
+    }
+  }
+}

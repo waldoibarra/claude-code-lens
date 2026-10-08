@@ -1,0 +1,3 @@
+{
+  "Exclude": ["^\\.claude-plugin/types/"]
+}
